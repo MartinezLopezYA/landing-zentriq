@@ -11,15 +11,15 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 w-full z-50 bg-(--secondary-color)/90 backdrop-blur-md shadow-header border-b border-(--border-color)">
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-(--secondary-color) backdrop-blur-md shadow-header border-b border-(--border-color)">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 text-(--surface-color) font-bold text-lg">
+        <a href="/#hero" class="flex items-center gap-2 text-(--surface-color) font-bold text-lg tracking-tight">
             <Image src={logoZentriq} alt="Logo Zentriq" width={2000} height={2000} class={'w-auto h-12'} loading={"eager"}/>
         </a>
         <div class="hidden md:flex items-center gap-4">
             <nav class="hidden md:flex items-center gap-1 bg-(--bg-card-color) border border-(--border-color) px-2 py-1 rounded-full">
                 {navLinks.map(link => (
-                    <a href={link.href} class="text-(--surface-color)/65 hover:text-(--surface-color) text-sm font-medium px-3 py-1.5 rounded-full hover:bg-(--bg-card-color-hover) transition-all duration-200">
+                    <a href={link.href} data-nav-link={link.href} class="nav-link-item relative text-(--surface-color)/65 hover:text-(--surface-color) text-sm font-medium px-3 py-1.5 rounded-full hover:bg-(--bg-card-color-hover) transition-all duration-200">
                         {link.name}
                     </a>
                 ))}
@@ -37,29 +37,76 @@ const navLinks = [
             </svg>
         </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex-col gap-1 bg-(--secondary-color)/95 border-t border-(--bg-card-color)">
-        {navLinks.map(link => (
-            <a href={link.href} class="text-sm font-medium text-(--surface-color)/70 hover:text-(--surface-color) hover:bg-(--bg-card-color) px-3 py-2.5 rounded-lg transition-all duration-200">
+    <div id="mobile-menu" class="md:hidden overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease;">
+        <div class="px-6 pb-5 pt-2 flex flex-col gap-1 bg-(--secondary-color) border-t border-(--primary-color)/10">
+            {navLinks.map((link, i) => (
+                <a href={link.href} data-menu-item data-nav-link={link.href} style={`transition-delay:${i * 50}ms`} class="nav-mobile-item text-sm font-medium text-(--surface-color)/70 hover:text-(--surface-color) hover:bg-(--bg-card-color) px-3 py-2.5 rounded-lg transition-all duration-200 opacity-0 -translate-y-2 border-l-2 border-transparent pl-2">
                 {link.name}
-            </a>
-        ))}
-        <div class="pt-2 mt-1 border-t border-(--bg-card-color)">
-            <a href="#contact" class="inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) transition-all duration-200">
-                Empezar ahora
-            </a>
+                </a>
+            ))}
+            <div class="pt-2 mt-1 border-t border-(--bg-card-color)">
+                <a href="#contact" data-menu-item style={`transition-delay:${navLinks.length * 50}ms`} class="inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) transition-all duration-200 opacity-0 -translate-y-2" >
+                    Empezar ahora
+                </a>
+            </div>
         </div>
     </div>
 </header>
 
 <script>
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const iconOpen = document.getElementById('icon-open');
-    const iconClose = document.getElementById('icon-close');
-    toggle?.addEventListener('click', () => {
-        const isOpen = menu?.classList.toggle('hidden') === false;
-        menu?.classList.toggle('flex', isOpen);
-        iconOpen?.classList.toggle('hidden', isOpen);
-        iconClose?.classList.toggle('hidden', !isOpen);
+    const toggle = document.getElementById('menu-toggle') as HTMLButtonElement;
+    const menu = document.getElementById('mobile-menu') as HTMLElement;
+    const iconOpen = document.getElementById('icon-open') as HTMLElement;
+    const iconClose = document.getElementById('icon-close') as HTMLElement;
+    const mobileItems = menu.querySelectorAll<HTMLElement>('[data-menu-item]');
+
+    let isOpen = false;
+
+    function openMenu() {
+        isOpen = true;
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+        menu.style.opacity = '1';
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        mobileItems.forEach(item => item.classList.remove('opacity-0', '-translate-y-2'));
+    }
+
+    function closeMenu() {
+        isOpen = false;
+        menu.style.maxHeight = '0';
+        menu.style.opacity = '0';
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        mobileItems.forEach(item => item.classList.add('opacity-0', '-translate-y-2'));
+    }
+
+    toggle.addEventListener('click', () =>  isOpen ? closeMenu() : openMenu());
+    mobileItems.forEach(item => item.addEventListener('click', closeMenu));
+
+    const allNativeLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+    function setActive(href: string) {
+        allNativeLinks.forEach(link => {
+            const isActive = link.getAttribute('data-nav-link') === href;
+            link.classList.toggle('is-active', isActive);
+        });
+    }
+
+    const sectionIds = Array.from(allNativeLinks)
+        .map(link => link.getAttribute('data-nav-link')?.replace('#', ''))
+        .filter(Boolean) as string[];
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+            });
+        },
+        { rootMargin: '-64px 0px -55% 0px', threshold: 0 }
+    );
+
+    sectionIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) observer.observe(section);
     });
 </script>

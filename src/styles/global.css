@@ -18,19 +18,45 @@
   --border-color: #1E293B;
   --bg-card-color: #FFFFFF05;
   --bg-card-color-hover: #FFFFFF08;
-}
 
-body {
-  background-color: var(--secondary-color);
-  color: var(--surface-color);
 }
 
 .overflow-sections {
-  overflow: auto;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  right: 0.5rem;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: var(--primary-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.nav-link-item.is-active,
+.nav-link-item:hover {
+  color: var(--surface-color);
+}
+
+.nav-link-item.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav-mobile-item.is-active {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .overflow-sections::-webkit-scrollbar {
   width: 3px;
+  display: hidden;
 }
 
 .overflow-sections::-webkit-scrollbar-track {
