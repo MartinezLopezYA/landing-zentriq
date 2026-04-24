@@ -1,0 +1,59 @@
+---
+import Image from "astro/components/Image.astro";
+import logo from '../../media/images/Logo-Zentriq.png';
+---
+
+<section class="relative w-full overflow-hidden border-b border-(--border-color) bg-(--secondary-color)">
+    <div class="absolute inset-0 hero-dot-grid pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3/5 w-175 h-125 hero-glow pointer-events-none"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center text-center gap-5">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-(--accent-color)/20 bg-(--accent-color)/5 text-(--accent-color) text-xs font-medium tracking-widest uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-(--accent-color) animate-pulse"></span>
+            Diseño · Desarrollo · Conexión
+        </div>
+
+        <div class="w-16 h-16 rounded-2xl bg-(--bg-card-color) border border-(--border-color) flex items-center justify-center mt-1 shadow-sm">
+            <Image src={logo} width={512} height={512} class={'w-11 h-11 object-contain'} loading={'eager'} alt="Zentriq"/>
+        </div>
+
+        <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-(--surface-color) inline-block md:inline-flex gap-4 items-center justify-center">
+            Donde nace
+            <span class="hero-accent-text"> la conexión.</span>
+        </h2>
+
+        <div class="loader w-36 my-0.5"></div>
+
+        <p class="text-base sm:text-lg text-(--surface-color)/50">
+            En Zentriq desarrollamos soluciones digitales modernas para negocios y emprendedores. Creamos aplicaciones web innovadoras que conectan personas, optimizan procesos y transforman ideas en realidades tecnológicas.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-2">
+            <a href="#about" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) transition-all duration-200 shadow-neon">
+                Conocer más
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                </svg>
+            </a>
+            <a href="#projects" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-(--border-color) text-(--surface-color)/60 text-sm font-medium hover:border-(--surface-color)/20 hover:text-(--surface-color) transition-all duration-200 bg-(--bg-card-color)">
+                Ver proyectos
+            </a>
+        </div>
+
+        <div class="flex items-center gap-8 sm:gap-12 mt-8 pt-7 border-t border-(--border-color) w-full justify-center">
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-2xl font-bold text-(--surface-color) leading-none">2</span>
+                <span class="text-xs text-(--surface-color)/35 tracking-widest uppercase">Clientes</span>
+            </div>
+            <div class="w-px h-7 bg-(--border-color)"></div>
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-2xl font-bold text-(--surface-color) leading-none">3</span>
+                <span class="text-xs text-(--surface-color)/35 tracking-widest uppercase">Proyectos</span>
+            </div>
+            <div class="w-px h-7 bg-(--border-color)"></div>
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-2xl font-bold text-(--surface-color) leading-none">99%</span>
+                <span class="text-xs text-(--surface-color)/35 tracking-widest uppercase">Satisfacción</span>
+            </div>
+        </div>
+    </div>
+</section>

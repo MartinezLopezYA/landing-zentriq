@@ -1,0 +1,65 @@
+---
+import Image from "astro/components/Image.astro";
+import logoZentriq from '../media/images/Full-Icon.png';
+
+const navLinks = [
+    { name: 'Inicio', href: '#hero' },
+    { name: 'Nosotros', href: '#about' },
+    { name: 'Proyectos', href: '#projects' },
+    { name: 'Clientes', href: '#clients' },
+    { name: 'Contacto', href: '#contact' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-(--secondary-color)/90 backdrop-blur-md shadow-header border-b border-(--border-color)">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-(--surface-color) font-bold text-lg">
+            <Image src={logoZentriq} alt="Logo Zentriq" width={2000} height={2000} class={'w-auto h-12'} loading={"eager"}/>
+        </a>
+        <div class="hidden md:flex items-center gap-4">
+            <nav class="hidden md:flex items-center gap-1 bg-(--bg-card-color) border border-(--border-color) px-2 py-1 rounded-full">
+                {navLinks.map(link => (
+                    <a href={link.href} class="text-(--surface-color)/65 hover:text-(--surface-color) text-sm font-medium px-3 py-1.5 rounded-full hover:bg-(--bg-card-color-hover) transition-all duration-200">
+                        {link.name}
+                    </a>
+                ))}
+            </nav>
+        </div>
+        <button type="button" class="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) cursor-pointer transition-all duration-200 shadow-sm shadow-neon">
+            Empezar ahora
+        </button>
+        <button id="menu-toggle" class="md:hidden text-(--surface-color)/70 hover:text-(--surface-color) cursor-pointer rounded-lg hover:bg-(--bg-card-color-hover) transition-all duration-200 p-2" aria-label="Toggle menu">
+            <svg id="icon-open" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="icon-close" class="hidden" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex-col gap-1 bg-(--secondary-color)/95 border-t border-(--bg-card-color)">
+        {navLinks.map(link => (
+            <a href={link.href} class="text-sm font-medium text-(--surface-color)/70 hover:text-(--surface-color) hover:bg-(--bg-card-color) px-3 py-2.5 rounded-lg transition-all duration-200">
+                {link.name}
+            </a>
+        ))}
+        <div class="pt-2 mt-1 border-t border-(--bg-card-color)">
+            <a href="#contact" class="inline-flex items-center justify-center w-full px-5 py-2.5 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) transition-all duration-200">
+                Empezar ahora
+            </a>
+        </div>
+    </div>
+</header>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+    toggle?.addEventListener('click', () => {
+        const isOpen = menu?.classList.toggle('hidden') === false;
+        menu?.classList.toggle('flex', isOpen);
+        iconOpen?.classList.toggle('hidden', isOpen);
+        iconClose?.classList.toggle('hidden', !isOpen);
+    });
+</script>

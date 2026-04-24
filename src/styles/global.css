@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  /* Azul principal para botones y CTAs */
+  --primary-color: #2563EB;
+  --primary-color-hover: #3B82F6;
+
+  /* Navy profundo para fondos y superficies */
+  --secondary-color: #0C1628;
+  --secondary-color-hover: #172034;
+
+  /* Texto sobre fondos oscuros */
+  --surface-color: #EFF6FF;
+
+  /* Acento para highlights en texto */
+  --accent-color: #60A5FA;
+
+  --border-color: #1E293B;
+  --bg-card-color: #FFFFFF05;
+  --bg-card-color-hover: #FFFFFF08;
+}
+
+body {
+  background-color: var(--secondary-color);
+  color: var(--surface-color);
+}
+
+.overflow-sections {
+  overflow: auto;
+}
+
+.overflow-sections::-webkit-scrollbar {
+  width: 3px;
+}
+
+.overflow-sections::-webkit-scrollbar-track {
+  background-color: var(--secondary-color);
+}
+
+.shadow-header {
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 8px 32px -8px rgba(0, 0, 0, 0.6);
+}
+
+.shadow-neon {
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+}
+
+.shadow-neon:hover {
+  box-shadow: 0 0 16px rgba(96, 165, 250, 0.75);
+}
+
+.hero-dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.hero-glow {
+  background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.2) 0%, transparent 68%);
+  border-radius: 50%;
+}
+
+.hero-accent-text {
+  background: linear-gradient(135deg, var(--surface-color) 20%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loader {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  border-radius: 30px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--accent-color) 55%,
+      #ffffff 100%);
+  animation: shooting-star 3s linear infinite;
+}
+
+@keyframes shooting-star {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  28% {
+    transform: translateX(600%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
