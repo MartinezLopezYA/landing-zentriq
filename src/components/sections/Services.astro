@@ -1,0 +1,176 @@
+---
+const services = [
+    {
+        title: 'Diseño UI/UX',
+        description: 'Interfaces intuitivas y atractivas centradas en el usuario. Diseñamos experiencias que convierten visitantes en clientes.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" /></svg>`,
+    },
+    {
+        title: 'Desarrollo Web',
+        description: 'Sitios y aplicaciones web a medida con tecnologías modernas. Rendimiento, escalabilidad y código limpio desde el primer día.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>`,
+    },
+    {
+        title: 'E-commerce',
+        description: 'Tiendas en línea que venden. Integramos pasarelas de pago, gestión de inventario y estrategias para maximizar tus conversiones.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>`,
+    },
+    {
+        title: 'Aplicaciones Móviles',
+        description: 'Apps nativas e híbridas para iOS y Android. Llevamos tu producto a los bolsillos de tus clientes con experiencias fluidas.',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>`,
+    },
+];
+---
+
+<section id="services" class="relative w-full h-auto min-h-100 md:min-h-120 lg:min-h-160 bg-(--secondary-color)">
+    <div class="absolute inset-0 hero-dot-grid pointer-events-none opacity-30"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center gap-10">
+
+        <div class="flex flex-col items-center text-center gap-4 max-w-lg">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-(--accent-color)/20 bg-(--accent-color)/5 text-(--accent-color) text-xs font-medium tracking-widest uppercase">
+                Nuestros servicios
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-(--surface-color) tracking-tight leading-tight">
+                Soluciones digitales <span class="hero-accent-text">a tu medida.</span>
+            </h2>
+            <p class="text-sm sm:text-base text-(--surface-color)/50 leading-relaxed">
+                Ofrecemos servicios digitales personalizados para impulsar tu negocio al siguiente nivel.
+            </p>
+        </div>
+
+        <!-- Mobile: carrusel (una tarjeta a la vez) -->
+        <div class="w-full sm:hidden">
+            <div class="overflow-hidden w-full">
+                <div
+                    id="services-track"
+                    style={`display: flex; width: ${services.length * 100}%; transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);`}
+                >
+                    {services.map((service, i) => (
+                        <div
+                            style={`width: ${100 / services.length}%;`}
+                            class="group relative flex flex-col gap-6 bg-(--bg-card-color) border border-(--border-color) rounded-2xl p-8"
+                        >
+                            <div class="flex items-center justify-between">
+                                <div class="w-11 h-11 rounded-xl bg-(--primary-color)/10 border border-(--primary-color)/20 flex items-center justify-center text-(--accent-color) shrink-0" set:html={service.icon}></div>
+                                <span class="text-3xl font-bold text-(--surface-color)/6 select-none tabular-nums">
+                                    {String(i + 1).padStart(2, '0')}
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2 flex-1">
+                                <h3 class="text-base font-semibold text-(--surface-color)">{service.title}</h3>
+                                <p class="text-sm text-(--surface-color)/50 leading-relaxed">{service.description}</p>
+                            </div>
+                            <div class="pt-4 border-t border-(--border-color) flex items-center gap-1.5 text-(--surface-color)/30 text-xs font-medium">
+                                Saber más
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                                </svg>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Controles -->
+            <div class="flex items-center justify-between mt-5">
+                <button id="prev-service" aria-label="Anterior" class="flex items-center justify-center w-9 h-9 rounded-full border border-(--border-color) text-(--surface-color)/50 hover:text-(--surface-color) hover:border-(--accent-color)/30 transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/>
+                    </svg>
+                </button>
+                <div class="flex items-center gap-2">
+                    {services.map((_, i) => (
+                        <button class="service-dot rounded-full transition-all duration-300" aria-label={`Servicio ${i + 1}`}></button>
+                    ))}
+                </div>
+                <button id="next-service" aria-label="Siguiente" class="flex items-center justify-center w-9 h-9 rounded-full border border-(--border-color) text-(--surface-color)/50 hover:text-(--surface-color) hover:border-(--accent-color)/30 transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Desktop: grid de 2 columnas -->
+        <div class="hidden sm:grid grid-cols-2 gap-5 w-full">
+            {services.map((service, i) => (
+                <div class="group relative flex flex-col gap-6 bg-(--bg-card-color) border border-(--border-color) rounded-2xl p-8 hover:bg-(--bg-card-color-hover) hover:border-(--accent-color)/15 hover:cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-center justify-between">
+                        <div class="w-11 h-11 rounded-xl bg-(--primary-color)/10 border border-(--primary-color)/20 flex items-center justify-center text-(--accent-color) shrink-0" set:html={service.icon}></div>
+                        <span class="text-3xl font-bold text-(--surface-color)/6 select-none tabular-nums group-hover:text-(--surface-color)/50 transition-all duration-300">
+                            {String(i + 1).padStart(2, '0')}
+                        </span>
+                    </div>
+                    <div class="flex flex-col gap-2 flex-1">
+                        <h3 class="text-base font-semibold text-(--surface-color)">{service.title}</h3>
+                        <p class="text-sm text-(--surface-color)/50 leading-relaxed">{service.description}</p>
+                    </div>
+                    <div class="pt-4 border-t border-(--border-color) flex items-center gap-1.5 text-(--surface-color)/30 group-hover:text-(--accent-color) transition-colors duration-300 text-xs font-medium">
+                        Saber más
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 w-full pt-6 border-t border-(--border-color)">
+            <div class="flex flex-col gap-1 text-center sm:text-left">
+                <p class="text-(--surface-color) font-semibold">¿Listo para comenzar tu proyecto?</p>
+                <p class="text-(--surface-color)/45 text-sm">Conversemos sobre cómo podemos ayudarte a crecer.</p>
+            </div>
+            <a href="#contact" class="shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--primary-color) text-(--surface-color) text-sm font-semibold hover:bg-(--primary-color-hover) hover:translate-x-1 transition-all duration-200 shadow-neon">
+                Empezar proyecto
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .service-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: var(--border-color);
+    }
+    .service-dot.is-active {
+        width: 1.25rem;
+        background-color: var(--primary-color);
+    }
+</style>
+
+<script>
+    const track = document.getElementById('services-track') as HTMLElement;
+    const prevBtn = document.getElementById('prev-service') as HTMLButtonElement;
+    const nextBtn = document.getElementById('next-service') as HTMLButtonElement;
+    const dots = document.querySelectorAll<HTMLElement>('.service-dot');
+    const total = dots.length;
+
+    let current = 0;
+
+    function goTo(index: number) {
+        current = Math.max(0, Math.min(index, total - 1));
+        track.style.transform = `translateX(-${current * (100 / total)}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current));
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+    }, { passive: true });
+
+    goTo(0);
+</script>

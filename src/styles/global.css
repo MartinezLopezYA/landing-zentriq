@@ -92,6 +92,13 @@
   background-clip: text;
 }
 
+.hero-accent-text-dark {
+  background: linear-gradient(135deg, var(--secondary-color) 20%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .loader {
   display: block;
   width: 100%;

@@ -1,0 +1,140 @@
+---
+const products = [
+    {
+        name: 'Zentriq Store',
+        tagline: 'Tu tienda en línea lista en minutos',
+        description: 'Plataforma de e-commerce completa para emprendedores y pequeños negocios. Sin conocimientos técnicos.',
+        price: '29',
+        period: 'mes',
+        badge: { label: 'Beta', style: 'beta' },
+        featured: false,
+        features: [
+            'Catálogo ilimitado de productos',
+            'Pasarela de pagos integrada',
+            'Panel de administración',
+            'Dominio personalizado',
+            'Soporte por WhatsApp',
+        ],
+        cta: { label: 'Empezar gratis', href: '#contact' },
+    },
+    {
+        name: 'Zentriq Suite',
+        tagline: 'La solución todo en uno para tu negocio',
+        description: 'Combina tienda, punto de venta, gestión de clientes y reportes avanzados en una sola plataforma.',
+        price: '79',
+        period: 'mes',
+        badge: { label: 'Más popular', style: 'popular' },
+        featured: true,
+        features: [
+            'Todo lo de Zentriq Store',
+            'Punto de venta (POS) en la nube',
+            'CRM y gestión de clientes',
+            'Reportes y analíticas avanzadas',
+            'Soporte prioritario 24/7',
+            'Integraciones con redes sociales',
+        ],
+        cta: { label: 'Empezar ahora', href: '#contact' },
+    },
+    {
+        name: 'Zentriq Reservas',
+        tagline: 'Agenda y citas para tu negocio',
+        description: 'Sistema de reservas en línea para salones, clínicas, estudios y cualquier negocio basado en citas.',
+        price: '19',
+        period: 'mes',
+        badge: { label: 'Próximamente', style: 'soon' },
+        featured: false,
+        features: [
+            'Calendario de citas en línea',
+            'Recordatorios automáticos por WhatsApp',
+            'Gestión de múltiples empleados',
+            'Pagos anticipados opcionales',
+            'Página de reservas personalizada',
+        ],
+        cta: { label: 'Unirse al beta', href: '#contact' },
+    },
+];
+
+const badgeStyles: Record<string, string> = {
+    available: 'border-emerald-500/30 bg-emerald-500/8 text-emerald-400',
+    popular:   'border-(--accent-color)/30 bg-(--accent-color)/8 text-(--accent-color)',
+    beta:      'border-amber-500/30 bg-amber-500/8 text-amber-400',
+    soon:      'border-(--border-color) bg-(--bg-card-color) text-(--surface-color)/40',
+};
+---
+
+<section id="products" class="relative w-full bg-(--secondary-color-hover)">
+    <div class="absolute inset-0 hero-dot-grid pointer-events-none opacity-40"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center gap-14">
+        <div class="flex flex-col items-center text-center gap-4 max-w-lg">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-(--accent-color)/20 bg-(--accent-color)/5 text-(--accent-color) text-xs font-medium tracking-widest uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-(--accent-color) animate-pulse"></span>
+                Nuestros productos
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-(--surface-color) tracking-tight leading-tight">
+                Plataformas listas para <span class="hero-accent-text">suscribirte.</span>
+            </h2>
+            <p class="text-sm sm:text-base text-(--surface-color)/50 leading-relaxed">
+                Aplicativos propios desarrollados por Zentriq. Actívalos hoy y empieza a vender, gestionar y crecer.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full items-start">
+            {products.map(product => (
+                <div class:list={[
+                    'relative flex flex-col gap-6 rounded-2xl p-8 transition-all duration-300',
+                    product.featured
+                        ? 'bg-(--primary-color)/8 border-2 border-(--primary-color)/40 hover:border-(--primary-color)/60 shadow-[0_0_40px_-12px_rgba(37,99,235,0.3)]'
+                        : 'bg-(--bg-card-color) border border-(--border-color) hover:bg-(--bg-card-color-hover) hover:border-(--accent-color)/15'
+                ]}>
+                    {product.featured && (
+                        <div class="absolute -top-px left-0 right-0 h-px from-transparent via-(--primary-color) to-transparent"></div>
+                    )}
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex flex-col gap-1">
+                            <h3 class="text-lg font-bold text-(--surface-color)">{product.name}</h3>
+                            <p class="text-xs text-(--surface-color)/45">{product.tagline}</p>
+                        </div>
+                        <span class:list={[
+                            'shrink-0 px-2.5 py-1 rounded-full text-xs font-medium border',
+                            badgeStyles[product.badge.style]
+                        ]}>
+                            {product.badge.label}
+                        </span>
+                    </div>
+
+                    <p class="text-sm text-(--surface-color)/50 leading-relaxed">{product.description}</p>
+
+                    <div class="flex items-end gap-1">
+                        <span class="text-4xl font-bold text-(--surface-color) leading-none">${product.price}</span>
+                        <span class="text-(--surface-color)/40 text-sm mb-1">/{product.period}</span>
+                    </div>
+
+                    <ul class="flex flex-col gap-2.5">
+                        {product.features.map(feature => (
+                            <li class="flex items-start gap-2.5 text-sm text-(--surface-color)/60">
+                                <svg class="w-4 h-4 text-(--accent-color) shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                                </svg>
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <a href={product.cta.href} class:list={[
+                            'mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200',
+                            product.featured
+                                ? 'bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon'
+                                : 'border border-(--border-color) text-(--surface-color)/70 hover:text-(--surface-color) hover:border-(--accent-color)/30 bg-(--bg-card-color)'
+                        ]}>
+                        {product.cta.label}
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
+                </div>
+            ))}
+        </div>
+        <p class="text-xs text-(--surface-color)/30 text-center">
+            Todos los planes incluyen 14 días de prueba gratuita · Sin tarjeta de crédito
+        </p>
+    </div>
+</section>

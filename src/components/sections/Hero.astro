@@ -3,9 +3,9 @@ import Image from "astro/components/Image.astro";
 import logo from '../../media/images/Logo-Zentriq.png';
 ---
 
-<section id="hero" class="relative w-full h-auto min-h-100 md:min-h-120 lg:min-h-140 border-b border-(--border-color) bg-(--secondary-color)">
+<section id="hero" class="relative w-full h-auto min-h-100 md:min-h-120 lg:min-h-160 bg-(--secondary-color)">
     <div class="absolute inset-0 hero-dot-grid pointer-events-none"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3/5 w-175 h-125 hero-glow pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3/5 w-100 md:w-175 h-125 hero-glow pointer-events-none"></div>
     <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center text-center gap-5">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-(--accent-color)/20 bg-(--accent-color)/5 text-(--accent-color) text-xs font-medium tracking-widest uppercase">
             <span class="w-1.5 h-1.5 rounded-full bg-(--accent-color) animate-pulse"></span>
@@ -16,7 +16,7 @@ import logo from '../../media/images/Logo-Zentriq.png';
             <Image src={logo} width={512} height={512} class={'w-11 h-11 object-contain'} loading={'eager'} alt="Zentriq"/>
         </div>
 
-        <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-(--surface-color) inline-block md:inline-flex gap-4 items-center justify-center">
+        <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-(--surface-color) inline-block lg:inline-flex gap-4 items-center justify-center">
             Donde nace
             <span class="hero-accent-text"> la conexión.</span>
         </h2>
