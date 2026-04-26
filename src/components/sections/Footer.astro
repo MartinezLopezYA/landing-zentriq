@@ -1,0 +1,53 @@
+---
+import Image from "astro/components/Image.astro";
+import logo from '../../media/images/Logo-Zentriq.png';
+
+import whatsapp from '../../media/icons/socials/Whatsapp.svg';
+import facebook from '../../media/icons/socials/Facebook.svg';
+import instagram from '../../media/icons/socials/Instagram.svg';
+import tikTok from '../../media/icons/socials/TikTok.svg';
+
+const socials = [
+    {
+        name: 'Whatsapp',
+        url: 'https://www.facebook.com/zentriq/',
+        icon: whatsapp
+    },
+    {
+        name: 'Facebook',
+        url: 'https://www.facebook.com/profile.php?id=61586507270201',
+        icon: facebook
+    },
+    {
+        name: 'Instagram',
+        url: 'https://www.instagram.com/zentriq41/',
+        icon: instagram
+    },
+    {
+        name: 'TikTok',
+        url: 'https://www.tiktok.com/@zentriq5',
+        icon: tikTok
+    }
+]
+---
+
+<section id="footer" class="relative w-full h-auto bg-(--secondary-color)">
+    <div class="absolute inset-0 hero-dot-grid pointer-events-none"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex justify-between items-center gap-5">
+        <a href="/#hero">
+            <Image src={logo} alt="Zentriq Logo" class="w-20 h-auto" />
+        </a>
+        <div class="flex flex-col text-xs text-(--surface-color)/70">
+            <span class="font-bold">Zentriq - Zipaquirá (Cundinamarca) - Colombia </span>
+            <span>© 2026 Zentriq. All rights reserved.</span>
+            <span>Designed by Zentriq Team</span>
+        </div>
+        <div class="flex gap-4 p-1">
+            {socials.map((social) => (
+                <a href={social.url} target="_blank" rel="noopener noreferrer" class="w-6 h-6 bg-(--surface-color)/20 hover:scale-105 shadow-neon rounded-full transition-all duration-300">
+                    <Image src={social.icon} alt={`${social.name} Icon`} width={100} height={100} class="w-full h-full text-(--surface-color)/70" />
+                </a>
+            ))}
+        </div>
+    </div>
+</section>
