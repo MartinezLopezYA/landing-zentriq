@@ -1,40 +1,40 @@
 ---
 const products = [
     {
-        name: 'Zentriq Store',
+        name: 'Zentriq template Store',
         tagline: 'Tu tienda en línea lista en minutos',
-        description: 'Plataforma de e-commerce completa para emprendedores y pequeños negocios. Sin conocimientos técnicos.',
-        price: '29',
-        period: 'mes',
-        badge: { label: 'Beta', style: 'beta' },
+        description: 'Plataforma web para emprendedores y pequeños negocios que ayudará a vender a través de internet de forma sencilla y cómoda. Sin conocimientos técnicos.',
+        price: '180.000',
+        period: 'desde',
+        badge: { label: 'Listo', style: 'popular' },
         featured: false,
         features: [
             'Catálogo ilimitado de productos',
             'Pasarela de pagos integrada',
-            'Panel de administración',
             'Dominio personalizado',
-            'Soporte por WhatsApp',
+            'Conexión a WhatsApp',
+            'Más'
         ],
-        cta: { label: 'Empezar gratis', href: '#contact' },
+        cta: { label: 'Ver opciones', href: '#contact', openModal: true },
     },
-    {
-        name: 'Zentriq Suite',
-        tagline: 'La solución todo en uno para tu negocio',
-        description: 'Combina tienda, punto de venta, gestión de clientes y reportes avanzados en una sola plataforma.',
-        price: '79',
-        period: 'mes',
-        badge: { label: 'Más popular', style: 'popular' },
-        featured: true,
-        features: [
-            'Todo lo de Zentriq Store',
-            'Punto de venta (POS) en la nube',
-            'CRM y gestión de clientes',
-            'Reportes y analíticas avanzadas',
-            'Soporte prioritario 24/7',
-            'Integraciones con redes sociales',
-        ],
-        cta: { label: 'Empezar ahora', href: '#contact' },
-    },
+    // {
+    //     name: 'Zentriq Suite',
+    //     tagline: 'La solución todo en uno para tu negocio',
+    //     description: 'Combina tienda, punto de venta, gestión de clientes y reportes avanzados en una sola plataforma.',
+    //     price: '50.000',
+    //     period: 'mes',
+    //     badge: { label: 'Próximamente', style: 'soon' },
+    //     featured: false,
+    //     features: [
+    //         'Todo lo de Zentriq Store',
+    //         'Punto de venta (POS) en la nube',
+    //         'CRM y gestión de clientes',
+    //         'Reportes y analíticas avanzadas',
+    //         'Soporte prioritario 24/7',
+    //         'Integraciones con redes sociales',
+    //     ],
+    //     cta: { label: 'Empezar ahora', href: '#contact' },
+    // },
     {
         name: 'Zentriq Reservas',
         tagline: 'Agenda y citas para tu negocio',
@@ -50,30 +50,104 @@ const products = [
             'Pagos anticipados opcionales',
             'Página de reservas personalizada',
         ],
-        cta: { label: 'Unirse al beta', href: '#contact' },
+        cta: { label: 'Saber más', href: '', openModal: false },
     },
 ];
 
 const badgeStyles: Record<string, string> = {
-    available: 'border-emerald-500/30 bg-emerald-500/8 text-emerald-400',
-    popular:   'border-(--accent-color)/30 bg-(--accent-color)/8 text-(--accent-color)',
-    beta:      'border-amber-500/30 bg-amber-500/8 text-amber-400',
-    soon:      'border-(--border-color) bg-(--bg-card-color) text-(--surface-color)/40',
+    available:  'border-emerald-500/30 bg-emerald-500/8 text-emerald-400',
+    popular:    'border-(--accent-color)/30 bg-(--accent-color)/8 text-(--accent-color)',
+    highlight:  'border-(--primary-color)/40 bg-(--primary-color)/10 text-(--primary-color)',
+    premium:    'border-violet-500/30 bg-violet-500/8 text-violet-400',
+    default:    'border-(--border-color) bg-(--bg-card-color) text-(--surface-color)/60',
+    beta:       'border-amber-500/30 bg-amber-500/8 text-amber-400',
+    soon:       'border-(--border-color) bg-(--bg-card-color) text-(--surface-color)/40',
+};
+
+const messageBasic: string = 'Hola, estoy interesado en el plan Basic de Zentriq. ¿Podrían darme más información?';
+const messageAdvanced: string = 'Hola, estoy interesado en el plan Advanced de Zentriq. ¿Podrían darme más información?';
+const messagePremium: string = 'Hola, estoy interesado en el plan Premium de Zentriq. ¿Podrían darme más información?';
+
+const phone = '573182848957';
+
+const optionsTemplates = {
+    basic: {
+        name: 'Zentriq Store Basic',
+        tagline: 'Empieza rápido y a bajo costo',
+        description: 'Crea tu tienda online y muestra tus productos con integración directa a WhatsApp. Ideal si quieres empezar por tu cuenta.',
+        price: '$180.000 COP',
+        period: 'pago único',
+        badge: { label: 'Económico', style: 'default' },
+        featured: false,
+        features: [
+            'Catálogo ilimitado de productos',
+            'Categorías y etiquetas',
+            'Integración con WhatsApp',
+            'Dominio: no incluido',
+            'Configuración autogestionada (requiere Airtable)',
+        ],
+        cta: {
+            label: 'Empezar ahora',
+            href: `https://wa.me/${phone}?text=${encodeURIComponent(messageBasic)}`,
+        },
+    },
+
+    advanced: {
+        name: 'Zentriq Store Advanced',
+        tagline: 'Tu tienda lista para vender',
+        description: 'Te ayudamos a lanzar tu tienda online con configuración inicial y personalización básica para tu marca.',
+        price: '$380.000 COP',
+        period: 'pago único',
+        badge: { label: 'Recomendado', style: 'highlight' },
+        featured: true,
+        features: [
+            'Todo lo del plan Basic',
+            'Personalización con tu marca',
+            'Configuración inicial incluida',
+            'Dominio incluido - renovación',
+            'Acompañamiento en el lanzamiento',
+        ],
+        cta: {
+            label: 'Quiero este plan',
+            href: `https://wa.me/${phone}?text=${encodeURIComponent(messageAdvanced)}`,
+        },
+    },
+
+    premium: {
+        name: 'Zentriq Store Premium',
+        tagline: 'Nos encargamos de todo por ti',
+        description: 'Solución completa llave en mano: diseño personalizado, configuración total, dominio, hosting y soporte continuo.',
+        price: '$500.000 COP + $50.000/mes',
+        period: 'suscripción',
+        badge: { label: 'Todo incluido', style: 'soon' },
+        featured: false,
+        features: [
+            'Todo lo del plan Advanced',
+            'Diseño 100% personalizado',
+            'Dominio incluido (.com) + renovación',
+            'Soporte prioritario continuo',
+            'Panel de gestión personalizado',
+        ],
+        cta: {
+            label: 'Hablar por WhatsApp',
+            href: `https://wa.me/${phone}?text=${encodeURIComponent(messagePremium)}`,
+        },
+    },
 };
 ---
 
 <section id="products" class="relative w-full bg-(--secondary-color-hover)">
     <div class="absolute inset-0 hero-dot-grid pointer-events-none opacity-40"></div>
-    <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center gap-14">
-        <div class="flex flex-col items-center text-center gap-4 max-w-lg">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-8 flex flex-col items-center gap-6">
+        <div class="relative z-10 max-w-6xl mx-auto px-6 py-10 flex flex-col items-center text-center gap-5">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-(--accent-color)/20 bg-(--accent-color)/5 text-(--accent-color) text-xs font-medium tracking-widest uppercase">
                 <span class="w-1.5 h-1.5 rounded-full bg-(--accent-color) animate-pulse"></span>
                 Nuestros productos
             </div>
-            <h2 class="text-3xl sm:text-4xl font-bold text-(--surface-color) tracking-tight leading-tight">
+            <h2 class="text-3xl sm:text-4xl font-bold text-(--surface-color) inline-block lg:inline-flex gap-2 items-center justify-center">
                 Plataformas listas para <span class="hero-accent-text">suscribirte.</span>
             </h2>
-            <p class="text-sm sm:text-base text-(--surface-color)/50 leading-relaxed">
+            <p class="text-sm sm:text-base text-(--surface-color)/50">
                 Aplicativos propios desarrollados por Zentriq. Actívalos hoy y empieza a vender, gestionar y crecer.
             </p>
         </div>
@@ -105,7 +179,7 @@ const badgeStyles: Record<string, string> = {
                     <p class="text-sm text-(--surface-color)/50 leading-relaxed">{product.description}</p>
 
                     <div class="flex items-end gap-1">
-                        <span class="text-4xl font-bold text-(--surface-color) leading-none">${product.price}</span>
+                        <span class="text-3xl font-bold text-(--surface-color) leading-none">${product.price}</span>
                         <span class="text-(--surface-color)/40 text-sm mb-1">/{product.period}</span>
                     </div>
 
@@ -119,22 +193,168 @@ const badgeStyles: Record<string, string> = {
                             </li>
                         ))}
                     </ul>
-                    <a href={product.cta.href} class:list={[
+                    <button
+                        type="button"
+                        data-open-modal={product.cta.openModal ? 'plans-modal' : undefined}
+                        disabled={!product.cta.openModal}
+                        class:list={[
                             'mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200',
-                            product.featured
-                                ? 'bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon'
-                                : 'border border-(--border-color) text-(--surface-color)/70 hover:text-(--surface-color) hover:border-(--accent-color)/30 bg-(--bg-card-color)'
+                            product.cta.openModal
+                                ? 'cursor-pointer bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon'
+                                : 'cursor-not-allowed border border-(--border-color) text-(--surface-color)/30 bg-(--bg-card-color) opacity-50'
                         ]}>
                         {product.cta.label}
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
-                        </svg>
-                    </a>
+                        {product.cta.openModal && (
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                            </svg>
+                        )}
+                    </button>
                 </div>
             ))}
         </div>
         <p class="text-xs text-(--surface-color)/30 text-center">
-            Todos los planes incluyen 14 días de prueba gratuita · Sin tarjeta de crédito
+            Todos los planes incluyen asesoría de inicio a fin
         </p>
     </div>
 </section>
+
+<div id="plans-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300" >
+    <div data-close-modal="plans-modal" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="relative z-10 w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl border border-(--border-color) bg-(--secondary-color-hover) shadow-2xl translate-y-4 transition-transform duration-300">
+        <!-- Header -->
+        <div class="sticky top-0 z-10 flex items-center justify-between px-6 py-5 border-b border-(--border-color) bg-(--secondary-color-hover)/95 backdrop-blur-md rounded-t-3xl">
+            <div class="flex flex-col gap-0.5">
+                <h2 id="modal-title" class="text-lg font-bold text-(--surface-color)">Elige tu plan</h2>
+                <p class="text-xs text-(--surface-color)/45">Zentriq template Store · Pago único, sin mensualidades</p>
+            </div>
+            <button
+                type="button"
+                data-close-modal="plans-modal"
+                class="flex items-center justify-center w-8 h-8 rounded-full border border-(--border-color) text-(--surface-color)/50 hover:text-(--surface-color) hover:border-(--accent-color)/40 transition-colors duration-200 cursor-pointer"
+                aria-label="Cerrar"
+            >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Plans grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 p-6">
+            {Object.values(optionsTemplates).map((plan: any) => (
+                <div class:list={[
+                    'relative flex flex-col gap-5 rounded-2xl p-6 transition-all duration-300',
+                    plan.featured
+                        ? 'bg-(--primary-color)/8 border-2 border-(--primary-color)/50 shadow-[0_0_30px_-10px_rgba(37,99,235,0.35)]'
+                        : 'bg-(--bg-card-color) border border-(--border-color)'
+                ]}>
+                    {plan.featured && (
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-(--primary-color) text-(--surface-color) shadow-neon">
+                                Más popular
+                            </span>
+                        </div>
+                    )}
+                    <div class="flex items-start justify-between gap-2 mt-2">
+                        <div>
+                            <h3 class="text-base font-bold text-(--surface-color)">{plan.name}</h3>
+                            <p class="text-xs text-(--surface-color)/45 mt-0.5">{plan.tagline}</p>
+                        </div>
+                        <span class:list={[
+                            'shrink-0 px-2.5 py-1 rounded-full text-xs font-medium border',
+                            badgeStyles[plan.badge.style]
+                        ]}>
+                            {plan.badge.label}
+                        </span>
+                    </div>
+                    <div class="flex flex-col gap-0.5">
+                        <span class="text-2xl font-bold text-(--surface-color) leading-none">{plan.price}</span>
+                        <span class="text-(--surface-color)/40 text-xs">{plan.period}</span>
+                    </div>
+                    <p class="text-xs text-(--surface-color)/50 leading-relaxed">{plan.description}</p>
+                    <div class="h-px bg-(--border-color)"></div>
+                    <ul class="flex flex-col gap-2 flex-1">
+                        {plan.features.map((feature: any) => (
+                            <li class="flex items-start gap-2 text-xs text-(--surface-color)/60">
+                                <svg class="w-3.5 h-3.5 text-(--accent-color) shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                                </svg>
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <a
+                        href={plan.cta.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class:list={[
+                            'mt-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200',
+                            plan.badge.style === 'soon'
+                                ? 'border border-(--border-color) text-(--surface-color)/40 cursor-not-allowed pointer-events-none'
+                                : plan.featured
+                                    ? 'bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon'
+                                    : 'border border-(--border-color) text-(--surface-color)/70 hover:text-(--surface-color) hover:border-(--accent-color)/30 bg-(--bg-card-color)'
+                        ]}
+                    >
+                        {plan.badge.style === 'soon' ? 'Próximamente' : plan.cta.label}
+                        {plan.badge.style !== 'soon' && (
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                            </svg>
+                        )}
+                    </a>
+                </div>
+            ))}
+        </div>
+        <div class="w-full flex items-center justify-center text-center">
+            <a href="https://template-enterpreneurs.vercel.app/" target="_blank" rel="noopener noreferrer"class="text-center text-xs text-(--surface-color)/30 pb-6 px-6 inline-flex items-center justify-center gap-1 hover:text-lg hover:text-(--surface-color)/50 transition-all duration-200 cursor-pointer">
+                Ver plantilla
+                <svg class="inline-block w-3.5 h-3.5 ml-1" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178a1.012 1.012 0 010 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initModal(modalId: string) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        const panel = modal.querySelector(':scope > div:last-child') as HTMLElement | null;
+
+        function openModal() {
+            modal!.classList.remove('opacity-0', 'pointer-events-none');
+            modal!.classList.add('opacity-100');
+            panel?.classList.remove('translate-y-4');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal!.classList.remove('opacity-100');
+            modal!.classList.add('opacity-0');
+            panel?.classList.add('translate-y-4');
+            setTimeout(() => modal!.classList.add('pointer-events-none'), 300);
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll(`[data-open-modal="${modalId}"]`).forEach(btn => {
+            btn.addEventListener('click', openModal);
+        });
+
+        document.querySelectorAll(`[data-close-modal="${modalId}"]`).forEach(el => {
+            el.addEventListener('click', closeModal);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal!.classList.contains('pointer-events-none')) {
+                closeModal();
+            }
+        });
+    }
+
+    initModal('plans-modal');
+</script>
