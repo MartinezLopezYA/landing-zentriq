@@ -39,18 +39,18 @@ const products = [
         name: 'Zentriq Reservas',
         tagline: 'Agenda y citas para tu negocio',
         description: 'Sistema de reservas en línea para salones, clínicas, estudios y cualquier negocio basado en citas.',
-        price: '19',
-        period: 'mes',
-        badge: { label: 'Próximamente', style: 'soon' },
+        price: '45.000',
+        period: 'desde',
+        badge: { label: 'Disponible', style: 'available' },
         featured: false,
         features: [
             'Calendario de citas en línea',
-            'Recordatorios automáticos por WhatsApp',
-            'Gestión de múltiples empleados',
-            'Pagos anticipados opcionales',
-            'Página de reservas personalizada',
+            'Página de reservas pública para tus clientes',
+            'Gestión de múltiples sucursales y usuarios',
+            'Cobros con pasarela de pagos integrada',
+            'Notificaciones en tiempo real para tu equipo',
         ],
-        cta: { label: 'Saber más', href: '', openModal: false },
+        cta: { label: 'Regístrate ahora', href: 'https://zenglow-app-front.vercel.app/modules/auth/register', openModal: false },
     },
 ];
 
@@ -193,23 +193,35 @@ const optionsTemplates = {
                             </li>
                         ))}
                     </ul>
-                    <button
-                        type="button"
-                        data-open-modal={product.cta.openModal ? 'plans-modal' : undefined}
-                        disabled={!product.cta.openModal}
-                        class:list={[
-                            'mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200',
-                            product.cta.openModal
-                                ? 'cursor-pointer bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon'
-                                : 'cursor-not-allowed border border-(--border-color) text-(--surface-color)/30 bg-(--bg-card-color) opacity-50'
-                        ]}>
-                        {product.cta.label}
-                        {product.cta.openModal && (
+                    {product.cta.openModal ? (
+                        <button
+                            type="button"
+                            data-open-modal="plans-modal"
+                            class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon">
+                            {product.cta.label}
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
                             </svg>
-                        )}
-                    </button>
+                        </button>
+                    ) : product.cta.href ? (
+                        <a
+                            href={product.cta.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer bg-(--primary-color) text-(--surface-color) hover:bg-(--primary-color-hover) shadow-neon">
+                            {product.cta.label}
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                            </svg>
+                        </a>
+                    ) : (
+                        <button
+                            type="button"
+                            disabled
+                            class="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-not-allowed border border-(--border-color) text-(--surface-color)/30 bg-(--bg-card-color) opacity-50">
+                            {product.cta.label}
+                        </button>
+                    )}
                 </div>
             ))}
         </div>
